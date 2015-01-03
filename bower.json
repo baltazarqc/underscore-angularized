@@ -17,7 +17,10 @@
     "bower_components",
     "vendor/",
     "test",
-    "tests"
+    "tests",
+    "karma.conf.js",
+    "package.json",
+    "Gruntfile.js"
   ],
   "dependencies": {
     "angular": "^1.2.0"
