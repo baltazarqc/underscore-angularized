@@ -1,0 +1,42 @@
+{
+  "name": "underscore-angularized",
+  "version": "1.7.0",
+  "description": "This is the NPM package for underscore-angularized.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "test-chrome" : "grunt chrome",
+    "test-firefox" : "grunt firefox",
+    "test-ie" : "grunt ie",
+    "install": "bower install && grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ng-angularized/underscore-angularized.git"
+  },
+  "keywords": [
+    "underscore",
+    "angular",
+    "angularjs"
+  ],
+  "author": "Nick Sterling <nicholas.v.sterling@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ng-angularized/underscore-angularized/issues"
+  },
+  "homepage": "https://github.com/ng-angularized/underscore-angularized",
+  "devDependencies": {
+    "bower": "~1.3.12",
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-karma": "~0.9.0",
+    "jasmine-core": "~2.1.3",
+    "karma": "~0.12.31",
+    "karma-chrome-launcher": "~0.1.7",
+    "karma-firefox-launcher": "~0.1.4",
+    "karma-ie-launcher": "~0.1.5",
+    "karma-jasmine": "~0.3.3",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-spec-reporter": "0.0.16"
+  }
+}
