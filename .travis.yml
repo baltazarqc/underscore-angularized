@@ -14,4 +14,4 @@ branches:
     - gh-pages
 
 script:
-    - npm test --cover
+    - npm test
