@@ -46,17 +46,100 @@
             });
 
 
-
         });
 
 
         describe('Underscore Functionality', function () {
 
             /**
+             * Can it pull out the first element of an array
+             */
+            it('first', function () {
+                expect(_.first([1, 2, 3])).toEqual(1);
+                expect(_([1, 2, 3]).first()).toEqual(1);
+                expect(_.first([1, 2, 3], 0)).toEqual([]);
+                expect(_.first([1, 2, 3], 2)).toEqual([1,2]);
+                expect(_.first([1, 2, 3], 5)).toEqual([1,2,3]);
+
+                var result = (function(){ return _.first(arguments); }(4, 3, 2, 1));
+                expect(result).toEqual(4);
+
+                result = _.map([[1, 2, 3], [1, 2, 3]], _.first);
+                expect(result).toEqual([1, 1]);
+
+                result = (function() { return _.first([1, 2, 3], 2); }());
+                expect(result).toEqual([1,2]);
+
+                expect(_.first(null)).toEqual(undefined);
+                
+                expect(_.first([1, 2, 3], -1).length).toEqual(0);
+            });
+
+
+
+            it('head', function() {
+                expect(_.first).toEqual(_.head); 
+            });
+
+
+            it('take', function() {
+                expect(_.first).toEqual(_.take);
+            });
+
+            it('rest', function() {
+                var numbers = [1, 2, 3, 4];
+                expect(_.rest(numbers)).toEqual([2, 3, 4]); //
+                expect(_.rest(numbers, 0)).toEqual([1, 2, 3, 4]);
+                expect(_.rest(numbers, 2)).toEqual([3,4]);
+                var result = (function(){ return _(arguments).rest(); }(1, 2, 3, 4));
+                expect(result).toEqual([2, 3, 4]);
+                result = _.map([[1, 2, 3], [1, 2, 3]], _.rest);
+                expect(_.flatten(result)).toEqual([2, 3, 2, 3]);
+                result = (function(){ return _(arguments).rest(); }(1, 2, 3, 4));
+                expect(result).toEqual([2, 3, 4]);
+            });
+
+            it('tail', function() {
+                expect(_.rest).toEqual(_.tail);
+            });
+
+            it('drop', function() {
+                expect(_.rest).toEqual(_.drop);
+            });
+
+            it('initial', function() {
+                expect(_.initial([1, 2, 3, 4, 5])).toEqual([1, 2, 3, 4]);
+                expect(_.initial([1, 2, 3, 4], 2)).toEqual([1,2]);
+                expect(_.initial([1, 2, 3, 4], 6)).toEqual([]);
+                var result = (function(){ return _(arguments).initial(); }(1, 2, 3, 4));
+                expect(result).toEqual([1, 2, 3]);
+                result = _.map([[1, 2, 3], [1, 2, 3]], _.initial);
+                expect(_.flatten(result)).toEqual([1, 2, 1, 2]);
+            });
+
+
+            it('last', function() {
+                expect(_.last([1, 2, 3])).toEqual(3);
+                expect(_.last([1, 2, 3], 0)).toEqual([]);
+                expect(_.last([1, 2, 3], 2)).toEqual([2,3]);
+                expect(_.last([1, 2, 3], 5)).toEqual([1, 2, 3]);
+                var result = (function(){ return _(arguments).last(); }(1, 2, 3, 4));
+                expect(result).toEqual(4);
+                result = _.map([[1, 2, 3], [1, 2, 3]], _.last);
+                expect(result).toEqual([3,3]);
+
+                expect(_.last(null)).toEqual(undefined);
+                expect(_.last([1, 2, 3], -1).length).toEqual(0);
+            });
+            
+            
+            /**
              * Test the maps functionality
              */
             it('maps', function () {
-                expect(_.map([1, 2, 3], function (num) {return num * 3;})).toEqual([3, 6, 9]);
+                expect(_.map([1, 2, 3], function (num) {
+                    return num * 3;
+                })).toEqual([3, 6, 9]);
             });
 
 
