@@ -151,6 +151,85 @@
             });
 
             /**
+             * Test the values functionality...
+             */
+            it('values', function () {
+                expect(_.values({one: 1, two: 2})).toEqual([1, 2]);
+            });
+
+            /**
+            * Test the pairs function
+            */
+            it('pairs', function () {
+                //console.log(_.pairs({one: 1, two: 2}));
+                expect(_.pairs({one: 1, two: 2})).toEqual([['one', 1], ['two', 2]]);
+            });
+
+            /**
+            *   Test the invert function
+            **/
+            it('invert', function (){
+               expect(_.invert({one: 1, two: 2})).toEqual({1: 'one', 2: 'two'});
+
+               var obj = {length: 3};
+               expect(_.invert(obj)[3]).toEqual('length');
+            });
+
+
+            /**
+            * Test the pick function
+            */
+            it('pick', function () {
+                var obj = {one: 1, two: 2, three: 3};
+                expect(_.pick(obj, 'one', 'three')).toEqual({one: 1, three: 3});
+                //can restrict based on an array not a string
+                expect(_.pick(obj, ['one', 'two'])).toEqual({one: 1, two: 2});
+                expect(_.pick(obj, ['two'], 'three')).toEqual({two: 2, three: 3});
+ 
+                // test the function context
+                var Obj = function(){};
+                Obj.prototype = {one: 1, two: 2, three: 3};
+                var instance = new Obj();
+                expect(_.pick(obj, function (val, key) {
+                    return this[key] === 3 && this === instance;
+                }, instance)).toEqual({three: 3});
+            });
+
+            /**
+            * Test the omit function
+            * Follows a similiar pattern to the pick test
+            */
+            it('omit', function (){
+                var obj = {one: 1, two: 2, three: 3};
+                expect(_.omit(obj, 'one')).toEqual({two: 2, three: 3});
+                expect(_.omit(obj, ['one', 'three'])).toEqual({two: 2});
+                expect(_.omit(obj, ['one'], 'three')).toEqual({two: 2});
+                
+                // test the function context
+                var Obj = function(){};
+                Obj.prototype = {one: 1, two: 2, three: 3};
+                var instance = new Obj();
+                expect(_.omit(obj, function (val, key) {
+                    return this[key] === 3 && this === instance;
+                }, instance)).toEqual({one: 1, two: 2});
+
+            });
+
+            /**
+            * Test the defaults function
+            */
+            it('defaults', function (){
+                var defs = {one: 1, two: 2, three: 3, four: null};
+                
+                _.defaults(defs, {fize: 5});
+                expect(defs.four).toEqual(null);
+                expect(defs.fize).toEqual(5);
+                // Test a string
+                expect(_.defaults("awesome")).toEqual("awesome");
+
+            });
+
+            /**
              * Test the throttle functionality...
              */
             it('Throttle', function () {

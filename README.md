@@ -1,6 +1,8 @@
 # __Underscore-Angularized__ 
 ## _[AngularJS](http://angularjs.org/) wrapper for  [Underscore](http://underscorejs.org/)_
 
+[![Build Status](https://travis-ci.org/ng-angularized/underscore-angularized.svg?branch=master)](https://travis-ci.org/ng-angularized/underscore-angularized)
+
 ## What is it?
 Underscore is a fantastic JavaScript library and it's an invaluable tool for web developers. I made this wrapper to solve two particular issues for Angular developers.
 * __Underscore is now fully in the Angular digest lifecycle__: Underscore provides a number of asynchronous functions that falls outside of the angular lifecycle and it's up to you to manage it with manual `$scope.$apply()` calls. (`_.throttle` and `_.debounce` as examples) You can now use any function provided by Underscore and it will be in the angular lifecycle.
