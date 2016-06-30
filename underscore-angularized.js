@@ -764,15 +764,17 @@
                 _.throttle = function(func, wait, options) {
                     var context, args, result;
                     var timeout = null;
-                    var previous = 0;
+                    var previous = 0;                    
                     if (!options) options = {};
+                    
                     var later = function() {
                         previous = options.leading === false ? 0 : _.now();
                         timeout = null;
                         result = func.apply(context, args);
                         if (!timeout) context = args = null;
                     };
-                    return function() {
+                    
+                    var throttled = function() {
                         var now = _.now();
                         if (!previous && options.leading === false) previous = now;
                         var remaining = wait - (now - previous);
@@ -789,6 +791,14 @@
                         }
                         return result;
                     };
+                    
+                    throttled.cancel = function(){
+                        $timeout.cancel(timeout);
+                        previous = 0;
+                        timeout = context = args = null;
+                    }
+                    
+                    return throttled;
                 };
 
                 // Returns a function, that, as long as it continues to be invoked, will not
@@ -811,8 +821,8 @@
                             }
                         }
                     };
-
-                    return function() {
+                    
+                    var debounced = function() {
                         context = this;
                         args = arguments;
                         timestamp = _.now();
@@ -825,6 +835,13 @@
 
                         return result;
                     };
+                    
+                    debounced.cancel = function(){
+                        $timeout.cancel(timeout);
+                        timeout = null;
+                    }
+                    
+                    return debounced;
                 };
 
                 // Returns the first function passed as an argument to the second,
